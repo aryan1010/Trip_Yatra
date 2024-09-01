@@ -1,0 +1,79 @@
+{% extends 'structure.home/html' %}
+{% load static %}
+{% block content %}
+<div class="uk-container-expand">
+    <!-- Hero Section -->
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="animation: push; autoplay: true; autoplay-interval: 5000;">
+        <ul class="uk-slideshow-items" uk-height-viewport="offset-top: true; offset-bottom: 30">
+            <li>
+                <img src="{% static 'img1.jpg' %}" alt="" class="uk-cover">
+                <div class="uk-position-center uk-text-center">
+                    <h1 class="uk-heading-medium uk-text-bold uk-margin-remove-bottom">Plan Your Dream Trip</h1>
+                    <p class="uk-text-large">Personalized itineraries in minutes</p>
+                    <a class="uk-button uk-button-primary uk-button-large" href="{% url 'register' %}">Get Started</a>
+                </div>
+            </li>
+            <li>
+                <img src="{% static 'img2.jpg' %}" alt="" uk-cover>
+                <div class="uk-position-center uk-text-center">
+                    <h1 class="uk-heading-medium uk-text-bold uk-margin-remove-bottom">Explore the World</h1>
+                    <p class="uk-text-large">Discover hidden gems and local favorites</p>
+                    <a class="uk-button uk-button-primary uk-button-large" href="{% url 'register' %}">Start Planning</a>
+                </div>
+            </li>
+        </ul>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="uk-section uk-section-muted">
+        <div class="uk-container">
+            <h2 class="uk-heading-line uk-text-center"><span>About Us</span></h2>
+            <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
+                <div>
+                    <p class="uk-text-justify">Our platform offers a personalized travel planning experience tailored to your unique preferences, budget, and interests. Whether you're dreaming of a cultural city tour, an adventurous expedition, or a relaxing beach getaway, Trip Yatra  crafts detailed itineraries that ensure you make the most of every moment.</p>
+                </div>
+                <div>
+                    <p class="uk-text-justify">We combine cutting-edge technology with expert recommendations to provide you with an intuitive and seamless planning experience. Our goal is to help you explore new destinations with ease, discover hidden gems, and enjoy your journey without the stress of traditional planning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="uk-section uk-section-default">
+        <div class="uk-container">
+            <h2 class="uk-heading-line uk-text-center"><span>Why Choose Trip Yatra ?</span></h2>
+            <div class="uk-child-width-1-2@s uk-child-width-1-4@m uk-text-center" uk-grid>
+                <div>
+                    <span uk-icon="icon: calendar; ratio: 2"></span>
+                    <h3 class="uk-margin-small-top">Personalized Itineraries</h3>
+                    <p>Tailored day-by-day plans based on your preferences</p>
+                </div>
+                <div>
+                    <span uk-icon="icon: credit-card; ratio: 2"></span>
+                    <h3 class="uk-margin-small-top">Budget-Friendly</h3>
+                    <p>Find the best options within your budget</p>
+                </div>
+                <div>
+                    <span uk-icon="icon: star; ratio: 2"></span>
+                    <h3 class="uk-margin-small-top">Expert Recommendations</h3>
+                    <p>Discover top attractions and hidden gems</p>
+                </div>
+                <div>
+                    <span uk-icon="icon: cloud; ratio: 2"></span>
+                    <h3 class="uk-margin-small-top">Weather Forecast</h3>
+                    <p>Plan your trip with weather in mind</p>
+                </div>
+            </div>
+            <div class="uk-margin-large-top uk-text-center">
+                <a class="uk-button uk-button-primary uk-button-large" href="{% url 'register' %}">Try out now!</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    
+</div>
+{% endblock %}

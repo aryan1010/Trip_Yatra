@@ -1,0 +1,124 @@
+{% extends 'structure.home/html' %}
+
+{% block content %}
+<div class="uk-section uk-section-muted">
+    <div class="uk-container uk-container-large">
+        <div class="uk-card uk-card-default uk-card-body uk-box-shadow-large">
+            <h1 class="uk-heading-medium uk-text-center uk-margin-remove-top">
+                <span class="uk-text-primary">{{ data.from_address }}</span> to <span class="uk-text-primary">{{ data.to_address }}</span>
+            </h1>
+            <hr class="uk-divider-icon uk-margin-medium">
+
+            <div uk-grid class="uk-grid-match">
+                <!-- Itinerary Section (Left Side) -->
+                <div class="uk-width-3-5@m">
+                    <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                        <h2 class="uk-card-title uk-text-bold">
+                            <span uk-icon="icon: location; ratio: 1.2"></span> Itinerary Details
+                        </h2>
+                        {% if itinerary %}
+                            <div class="uk-margin-top">
+                                <md>{{ itinerary }}</md>
+                            </div>
+                        {% else %}
+                            <p class="uk-text-danger">
+                                <span uk-icon="icon: warning"></span> Sorry, unable to fetch itinerary information at the moment.
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Right Side (Images and Weather) -->
+                <div class="uk-width-2-5@m">
+                    <!-- Images Section -->
+                   
+                    <!-- Weather Forecast Section -->
+                    <div class="uk-card uk-card-default uk-card-body uk-box-shadow-small">
+                        <h3 class="uk-card-title uk-text-bold">
+                            <span uk-icon="icon: cloud; ratio: 1.2"></span> Weather Information
+                        </h3>
+                        {% if weather_data %}
+                            <p class="uk-text-meta">
+                                <span uk-icon="icon: location"></span> {{ weather_data.resolvedAddress }}
+                            </p>
+                            
+                            {% if weather_data.current %}
+                            <div class="uk-card uk-card-primary uk-card-body uk-text-center">
+                                <h4 class="uk-card-title">Current Weather</h4>
+                                <p class="uk-text-large">{{ weather_data.current.condition }}</p>
+                                <p>
+                                    <span uk-icon="icon: thermometer"></span> 
+                                    {{ weather_data.current.temp_c }}°C / {{ weather_data.current.temp_f }}°F
+                                </p>
+                                <p>
+                                    Feels like: {{ weather_data.current.feelslike_c }}°C / {{ weather_data.current.feelslike_f }}°F
+                                </p>
+                                <p>
+                                    <span uk-icon="icon: move"></span>
+                                    {{ weather_data.current.wind_kph }} km/h {{ weather_data.current.wind_dir }}
+                                </p>
+                                <p>
+                                    <span uk-icon="icon: world"></span>
+                                    Humidity: {{ weather_data.current.humidity }}%
+                                </p>
+                            </div>
+                            {% endif %}
+                            
+                            {% if weather_data.days %}
+                            <h4 class="uk-heading-line uk-text-center"><span>Forecast</span></h4>
+                            <div class="uk-child-width-1-1 uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+                                {% for weather_data_item in weather_data.days %}
+                                <div>
+                                    <div class="uk-card uk-card-secondary uk-card-body uk-text-center">
+                                        <h4 class="uk-card-title">{{ weather_data_item.datetime|date:"D, M d" }}</h4>
+                                        <p class="uk-text-large">{{ weather_data_item.description }}</p>
+                                        <p>
+                                            <span uk-icon="icon: thermometer"></span> 
+                                            {{ weather_data_item.temp_c }}°C / {{ weather_data_item.temp_f }}°F
+                                        </p>
+                                        <p>
+                                            <span uk-icon="icon: umbrella"></span>
+                                            {{ weather_data_item.chance_of_rain }}% rain
+                                        </p>
+                                        <p>
+                                            <span uk-icon="icon: move"></span>
+                                            {{ weather_data_item.wind_kph }} km/h {{ weather_data_item.wind_dir }}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% else %}
+                            <p class="uk-text-danger">
+                                <span uk-icon="icon: warning"></span> Sorry, unable to fetch weather information at the moment.
+                            </p>
+                        {% endif %}
+                        
+                        <!-- Debug Information -->
+                        <details>
+                            <summary>Debug Information</summary>
+                            <pre>{{ weather_data|pprint }}</pre>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-margin-large-top uk-text-center">
+                <a href="#" class="uk-button uk-button-primary uk-button-large" onclick="printPageAsPDF()">
+                    <span uk-icon="download"></span> Download Itinerary
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = (event) => {
+        renderMarkdown();
+    };
+    function printPageAsPDF() {
+    window.print();
+}
+</script>
+{% endblock %}
